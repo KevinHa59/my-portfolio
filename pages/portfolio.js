@@ -12,6 +12,7 @@ import { CornerTR } from "../icons/cornr-tr";
 import { Border } from "../icons/border";
 import { TitleUnderline } from "../icons/title-underline";
 import { IntroBottom, IntroTop } from "../icons/intro-frame";
+import PaperS from "../components/component/PaperS";
 export default function Portfolio() {
   const styles = {
     color: "#fff",
@@ -83,60 +84,56 @@ export default function Portfolio() {
             <Stack
               direction={"row"}
               flexWrap={"wrap"}
-              gap={2}
+              gap={5}
               paddingX={6}
-              justifyContent={"space-evenly"}
+              justifyContent={"center"}
+              alignItems={"center"}
               sx={{ color: "inherit" }}
             >
               {Object.entries(resume.skills).map((skill, index) => {
                 return (
                   <Zoom in={true} key={index} timeout={index * 100}>
-                    <Paper
-                      sx={{
-                        borderRadius: "0 20px 0 0",
-                        border: "1px dashed rgba(150, 150, 150, 1)",
-                        borderLeft: "5px solid rgba(150, 150, 150, 1)",
-                        boxShadow: "none",
-                        background: "rgba(24, 26, 27,0.5)",
-                        minWidth: "23%",
-                        maxWidth: "100%",
-                        transition: "ease 0.3s",
-                      }}
-                    >
-                      <Typography
-                        variant="h6"
-                        fontWeight={"bold"}
-                        fontFamily={"monospace"}
-                        textTransform={"capitalize"}
-                        textAlign={"center"}
+                    <Stack>
+                      <PaperS
                         sx={{
                           padding: 1,
-                          color: "rgba(90, 169, 190,1)",
                         }}
                       >
-                        {skill[0]}
-                      </Typography>
-                      <Divider />
-                      <Stack padding={1} sx={{ color: "inherit" }}>
-                        {skill[1].map((detail, _index) => {
-                          return (
-                            <Typography
-                              key={_index}
-                              variant="body2"
-                              fontFamily={"monospace"}
-                              sx={{
-                                ":hover": {
-                                  background: "rgba(255,255,255,0.1)",
-                                },
-                                ...styles,
-                              }}
-                            >
-                              <CodeIcon sx={{ fontSize: "12px" }} /> {detail}
-                            </Typography>
-                          );
-                        })}
-                      </Stack>
-                    </Paper>
+                        <Typography
+                          variant="h6"
+                          fontWeight={"bold"}
+                          fontFamily={"monospace"}
+                          textTransform={"capitalize"}
+                          textAlign={"center"}
+                          sx={{
+                            padding: 1,
+                            color: "rgba(90, 169, 190,1)",
+                          }}
+                        >
+                          {skill[0]}
+                        </Typography>
+                        <Divider />
+                        <Stack padding={1} sx={{ color: "inherit" }}>
+                          {skill[1].map((detail, _index) => {
+                            return (
+                              <Typography
+                                key={_index}
+                                variant="body2"
+                                fontFamily={"monospace"}
+                                sx={{
+                                  ":hover": {
+                                    background: "rgba(255,255,255,0.1)",
+                                  },
+                                  ...styles,
+                                }}
+                              >
+                                <CodeIcon sx={{ fontSize: "12px" }} /> {detail}
+                              </Typography>
+                            );
+                          })}
+                        </Stack>
+                      </PaperS>
+                    </Stack>
                   </Zoom>
                 );
               })}
@@ -281,25 +278,33 @@ function Frames() {
       left={-6}
       right={-6}
     >
-      <Stack position={"relative"} width={"100%"} height={"100%"}>
-        <IntroTop
+      <Stack
+        position={"relative"}
+        alignItems={"center"}
+        width={"100%"}
+        height={"100%"}
+      >
+        <Stack
           sx={{
             position: "absolute",
             bottom: "calc(100% - 22px)",
-            fontSize: "200px",
-            height: "70px",
-            width: "100%",
+            width: "300px",
+            zIndex: 2,
           }}
-        />
-        <IntroBottom
+        >
+          <IntroTop />
+        </Stack>
+        <Stack
           sx={{
             position: "absolute",
             top: "calc(100% - 22px)",
-            fontSize: "200px",
-            height: "50px",
-            width: "100%",
+            width: "300px",
+            zIndex: 2,
           }}
-        />
+        >
+          <IntroBottom />
+        </Stack>
+
         <CornerTL
           sx={{
             ...frame_styles,

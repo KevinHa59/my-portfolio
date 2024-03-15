@@ -43,35 +43,40 @@ export default function Menu({ onChange }) {
 
   return (
     <Grow in={isActive} timeout={700}>
-      <Stack height={"max-content"} width={"max-content"} position={"relative"}>
-        <IntroTop
+      <Stack
+        height={"max-content"}
+        width={"max-content"}
+        alignItems={"center"}
+        position={"relative"}
+      >
+        <Stack
           sx={{
             position: "absolute",
-            bottom: "100%",
-            fontSize: "200px",
-            height: "80px",
-            width: "100%",
+            bottom: "calc(100% - 4px)",
+            width: "80%",
+            zIndex: 2,
             ...styles,
           }}
-        />
-        <IntroBottom
+        >
+          <IntroTop />
+        </Stack>
+        <Stack
           sx={{
             position: "absolute",
-            top: "100%",
-            fontSize: "200px",
-            height: "50px",
-            width: "100%",
+            top: "calc(100% - 5px)",
+            width: "80%",
+            zIndex: 2,
             ...styles,
           }}
-        />
+        >
+          <IntroBottom />
+        </Stack>
         <Paper
           sx={{
-            width: "300px",
-            background: "rgba(0,0,0,0.7)",
+            width: "500px",
             background:
-              "linear-gradient(155deg, rgba(5,5,5,0.5) 0, rgba(30,30,30,0.7) 50%, transparent 50%)",
-            border: "1px dashed #fff",
-            borderWidth: "0 2px 0 2px",
+              "linear-gradient(155deg, rgba(5,5,5,0.5) 0, rgba(30,30,30,0.7) 50%, rgba(0,0,0,0.7) 50%)",
+            border: "2px dashed #fff",
             position: "relative",
             overflow: "hidden",
           }}
