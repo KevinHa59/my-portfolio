@@ -19,7 +19,9 @@ export default function PaperS({ sx, children }) {
       }}
     >
       <Frame />
-      {children}
+      <Stack position={"relative"} zIndex={2}>
+        {children}
+      </Stack>
     </Stack>
   );
 }
@@ -34,6 +36,7 @@ function Frame() {
           left: -8,
           fontSize: "100px",
           color: "rgba(200,200,200,1)",
+          zIndex: 1,
         }}
       />
       <CornerBottomRightStyle1
@@ -43,6 +46,7 @@ function Frame() {
           right: -8,
           fontSize: "100px",
           color: "rgba(200,200,200,1)",
+          zIndex: 1,
         }}
       />
     </>

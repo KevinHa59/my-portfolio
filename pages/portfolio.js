@@ -13,10 +13,16 @@ import { Border } from "../icons/border";
 import { TitleUnderline } from "../icons/title-underline";
 import { IntroBottom, IntroTop } from "../icons/intro-frame";
 import PaperS from "../components/component/PaperS";
+import { VectorFlower1 } from "../icons/flower-vector/intro-frame";
+import TypographyS from "../components/component/TypographyS";
 export default function Portfolio() {
   const styles = {
     color: "#fff",
     fontFamily: "monospace",
+  };
+
+  const global = {
+    title: "rgba(90, 169, 190,1)",
   };
 
   return (
@@ -46,7 +52,7 @@ export default function Portfolio() {
             display: "flex",
             flexDirection: "column",
             gap: 5,
-            // overflow: "hidden",
+            boxShadow: "inset 0 0 60px rgba(255,255,255,0.2)",
           }}
         >
           <Frames />
@@ -73,9 +79,36 @@ export default function Portfolio() {
           <Stack paddingY={2} gap={2}>
             <Title title={"Summary"} />
             <Stack paddingX={6}>
-              <Typography variant="body2" fontFamily={"monospace"}>
-                {resume.summary}
-              </Typography>
+              <TypographyS
+                textStyles={[
+                  {
+                    text: [
+                      "Tong Ha",
+                      "Software Development",
+                      "ReactJS",
+                      "Redux",
+                      "Database",
+                      "MySQL",
+                    ],
+                    style: {
+                      color: global.title,
+                      fontWeight: "bold",
+                      letterSpacing: "0px",
+                      transition: "ease 0.3s",
+                      hover: {
+                        color: "rgba(0,150,255,1)",
+                        letterSpacing: "5px",
+                      },
+                    },
+                  },
+                ]}
+                variant="body2"
+                fontFamily={"monospace"}
+              >
+                {resume.summary +
+                  "<br/>" +
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quia animi, ipsa est nostrum illo voluptatibus, vel fuga laboriosam rem ea ipsam nisi sint ratione officiis cumque veritatis necessitatibus nesciunt?"}
+              </TypographyS>
             </Stack>
           </Stack>
 
@@ -277,6 +310,7 @@ function Frames() {
       bottom={-19}
       left={-6}
       right={-6}
+      zIndex={-1}
     >
       <Stack
         position={"relative"}
@@ -378,6 +412,7 @@ function Title({ title }) {
       alignItems={"center"}
       justifyContent={"center"}
       position={"relative"}
+      zIndex={-1}
     >
       <MainBorder />
       <Typography variant="h6" fontWeight={"bold"} fontFamily={"monospace"}>
