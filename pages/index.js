@@ -3,28 +3,27 @@ import { Fade, Paper, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import Menu from "../components/index/menu";
 import { useRouter } from "next/router";
+import Introduction from "../components/index/introduction";
 export default function Home() {
-  const [state, setState] = useState(0);
-  const router = useRouter();
-  const handleRoute = (menuValue) => {
-    if (menuValue === 2) {
-      router.push({
-        pathname: "portfolio",
-      });
-    }
-  };
+  const [tab, setTab] = useState(0);
 
   return (
-    <Stack>
-      <Stack
-        sx={{
-          height: "100vh",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {state === 0 && <Menu onChange={(menu) => handleRoute(menu)} />}
+    <Stack
+      sx={{
+        width: {
+          xl: "1600px",
+          md: "80%",
+          xs: "100%",
+        },
+      }}
+      minHeight={"100vh"}
+      direction={"row"}
+    >
+      <Stack width={"calc(100% - 200px)"} paddingY={5}>
+        {<Introduction isActive={tab === 0} />}
+      </Stack>
+      <Stack minWidth={"200px"}>
+        <Menu onChange={setTab} />
       </Stack>
     </Stack>
   );

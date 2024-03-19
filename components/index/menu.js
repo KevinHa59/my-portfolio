@@ -9,193 +9,64 @@ import {
   Zoom,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { IntroBottom, IntroTop } from "../../icons/intro-frame";
-import { PointerFinger } from "../../icons/pointer-finger";
-import { CornerStyle } from "../../icons/corner-style";
+
+const button_style = (isActive = false) => {
+  return {
+    color: "#fff",
+    textTransform: "none",
+    fontSize: 18,
+    fontWeight: 100,
+    display: "flex",
+    justifyContent: "flex-end",
+    background: isActive ? "rgba(255,255,255,0.1)" : "transparent",
+    backdropFilter: isActive ? "blur(3px)" : "none",
+    ":hover": {
+      background: "rgba(255,255,255,0.1)",
+    },
+  };
+};
 
 export default function Menu({ onChange }) {
-  const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState(-1);
-  const styles = {
-    color: "#fff",
-    fontFamily: "monospace",
-  };
+  const [selected, setSelected] = useState(0);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsActive(true);
-    }, 1000);
-  }, []);
-  const animationDelay = (_isActive) => {
-    return {
-      frame: _isActive ? 500 : 700,
-      startButton: _isActive ? 500 : 0,
-      portfolioButton: _isActive ? 600 : 200,
-    };
-  };
-
-  const handleChange = (selectedMenu) => {
-    setIsActive(false);
-    setTimeout(() => {
-      onChange && onChange(selectedMenu);
-    }, 700);
+  const handleSelectChange = (val) => {
+    setSelected(val);
+    onChange && onChange(val);
   };
 
   return (
-    <Grow in={isActive} timeout={700}>
-      <Stack
-        height={"max-content"}
-        width={"max-content"}
-        alignItems={"center"}
-        position={"relative"}
-      >
-        <Stack
-          sx={{
-            position: "absolute",
-            bottom: "calc(100% - 4px)",
-            width: "80%",
-            zIndex: 2,
-            ...styles,
-          }}
-        >
-          <IntroTop />
-        </Stack>
-        <Stack
-          sx={{
-            position: "absolute",
-            top: "calc(100% - 5px)",
-            width: "80%",
-            zIndex: 2,
-            ...styles,
-          }}
-        >
-          <IntroBottom />
-        </Stack>
-        <Paper
-          sx={{
-            width: "500px",
-            background:
-              "linear-gradient(155deg, rgba(5,5,5,0.5) 0, rgba(30,30,30,0.7) 50%, rgba(0,0,0,0.7) 50%)",
-            border: "2px dashed #fff",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <Stack width={"100%"} gap={1} paddingY={2}>
-            <Slide
-              in={isActive}
-              direction="right"
-              timeout={500}
-              style={{ transitionDelay: animationDelay(isActive).startButton }}
-            >
-              <Stack>
-                <ButtonFinger
-                  isSelected={selected === 1}
-                  onHover={() => setSelected(1)}
-                  onClick={() => handleChange(1)}
-                >
-                  Start
-                </ButtonFinger>
-              </Stack>
-            </Slide>
-            <Slide
-              in={isActive}
-              direction="right"
-              timeout={500}
-              style={{
-                transitionDelay: animationDelay(isActive).portfolioButton,
-              }}
-            >
-              <Stack>
-                <ButtonFinger
-                  isSelected={selected === 2}
-                  onHover={() => setSelected(2)}
-                  onClick={() => handleChange(2)}
-                >
-                  Portfolio
-                </ButtonFinger>
-              </Stack>
-            </Slide>
-          </Stack>
-          <Stack
-            sx={{
-              position: "absolute",
-              borderRadius: isActive ? "0%" : "50%",
-              bottom: 0,
-              left: 0,
-              height: isActive ? "100%" : "0%",
-              transition: "ease 1s",
-              aspectRatio: "1/1",
-              color: "rgba(255,255,255,0.3)",
-              justifyContent: "flex-end",
-              overflow: "hidden",
-            }}
-          >
-            <CornerStyle sx={{ fontSize: "120px" }} />
-          </Stack>
-        </Paper>
-      </Stack>
-    </Grow>
-  );
-}
-
-function ButtonFinger({ isSelected, onClick, onHover, children }) {
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    setIsActive(isSelected);
-  }, [isSelected]);
-  return (
-    <Stack
-      sx={{
-        width: "100%",
-        alignItems: "center",
-        overflow: "hidden",
-        position: "relative",
-      }}
-    >
-      <Zoom in={isActive} timeout={300}>
-        <Stack
-          width={"100%"}
-          height={"50%"}
-          sx={{
-            transition: "ease 0.3s",
-            position: "absolute",
-            top: "25%",
-            background:
-              "radial-gradient(rgba(255,255,255,0.3) 0%, transparent 70%)",
-          }}
-        />
-      </Zoom>
-
+    <Stack paddingY={5}>
       <Button
+        onClick={() => handleSelectChange(0)}
         sx={{
-          textTransform: "none",
-          color: "#fff",
-          width: "max-content",
-          position: "relative",
+          ...button_style(selected === 0),
         }}
-        onClick={onClick}
-        onMouseOver={onHover}
       >
-        {isSelected && (
-          <PointerFinger
-            sx={{
-              fontSize: "50px",
-              height: "35px",
-              position: "absolute",
-              right: "100%",
-            }}
-          />
-        )}
-
-        <Typography
-          variant="h5"
-          fontFamily={"monospace"}
-          fontWeight={isSelected ? "bold" : 100}
-        >
-          {children}
-        </Typography>
+        Introduction
+      </Button>
+      <Button
+        onClick={() => handleSelectChange(1)}
+        sx={{
+          ...button_style(selected === 1),
+        }}
+      >
+        About Me
+      </Button>
+      <Button
+        onClick={() => handleSelectChange(2)}
+        sx={{
+          ...button_style(selected === 2),
+        }}
+      >
+        Skills
+      </Button>
+      <Button
+        onClick={() => handleSelectChange(3)}
+        sx={{
+          ...button_style(selected === 3),
+        }}
+      >
+        Projects
       </Button>
     </Stack>
   );

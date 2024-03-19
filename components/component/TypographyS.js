@@ -2,34 +2,17 @@ import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function TypographyS({
-  sx,
   variant,
-  fontSize,
-  color,
-  fontStyle,
-  fontFamily,
-  textStyles,
-  fontWeight,
+
   children,
 }) {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    const _result = convert(children, textStyles);
+    const _result = variant ? convert(children, variant) : children;
     setResult(_result);
-  }, [children, textStyles]);
-  return (
-    <Typography
-      sx={sx}
-      variant={variant}
-      fontSize={fontSize}
-      color={color}
-      fontStyle={fontStyle}
-      fontFamily={fontFamily}
-      fontWeight={fontWeight}
-      dangerouslySetInnerHTML={{ __html: result }}
-    />
-  );
+  }, [children, variant]);
+  return <span dangerouslySetInnerHTML={{ __html: result }} />;
 }
 
 function convert(str, styles) {
