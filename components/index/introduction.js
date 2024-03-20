@@ -42,9 +42,13 @@ export default function Introduction({ isActive }) {
                     "ReactJS",
                     "NextJS",
                     "Node.js",
-                    "Java",
+                    "Spring Boot",
                   ],
-                  style: { fontWeight: "bold", color: "rgb(17, 227, 254)" },
+                  style: {
+                    fontWeight: "bold",
+                    color: "rgb(17, 227, 254)",
+                    textTransform: "uppercase",
+                  },
                 },
               ]}
             >

@@ -9,7 +9,7 @@ import {
   Zoom,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ButtonCollapse from "../component/button-collapse";
 const button_style = (isActive = false) => {
   return {
     color: "#fff",
@@ -39,33 +39,38 @@ export default function Menu({ onChange }) {
 
   return (
     <Stack paddingY={5}>
-      <Button
-        onClick={() => handleSelectChange(0)}
-        endIcon={selected === 0 && <ArrowLeftIcon />}
-        sx={{
-          ...button_style(selected === 0),
-        }}
-      >
-        Introduction
-      </Button>
-      <Button
-        onClick={() => handleSelectChange(1)}
-        endIcon={selected === 1 && <ArrowLeftIcon />}
-        sx={{
-          ...button_style(selected === 1),
-        }}
-      >
-        Skills
-      </Button>
-      <Button
-        onClick={() => handleSelectChange(2)}
-        endIcon={selected === 2 && <ArrowLeftIcon />}
-        sx={{
-          ...button_style(selected === 2),
-        }}
-      >
-        Projects
-      </Button>
+      <ButtonCollapse title="About Me">
+        <Button
+          fullWidth
+          size="small"
+          onClick={() => handleSelectChange(0)}
+          sx={{
+            ...button_style(selected === 0),
+          }}
+        >
+          Introduction
+        </Button>
+        <Button
+          fullWidth
+          size="small"
+          onClick={() => handleSelectChange(1)}
+          sx={{
+            ...button_style(selected === 1),
+          }}
+        >
+          Skills
+        </Button>
+        <Button
+          fullWidth
+          size="small"
+          onClick={() => handleSelectChange(2)}
+          sx={{
+            ...button_style(selected === 2),
+          }}
+        >
+          Edu & Exp
+        </Button>
+      </ButtonCollapse>
     </Stack>
   );
 }
