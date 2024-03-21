@@ -6,7 +6,16 @@ import { Stack } from "@mui/material";
 export default function EduExp({ isActive }) {
   return (
     <Blur active={isActive} timeout={500}>
-      <Stack width={"100%"} alignItems={"center"}>
+      <Stack
+        sx={{
+          width: {
+            xl: "60%",
+            md: "80%",
+            xs: "100%",
+          },
+        }}
+        alignItems={"center"}
+      >
         <TimeLine />
       </Stack>
     </Blur>
