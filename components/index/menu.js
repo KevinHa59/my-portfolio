@@ -85,16 +85,6 @@ export default function Menu({ onChange }) {
         >
           Edu & Exp
         </Button>
-        <Button
-          fullWidth
-          size="small"
-          onClick={() => handleSelectChange("edu-exp")}
-          sx={{
-            ...button_style(selected === "edu-exp"),
-          }}
-        >
-          Test
-        </Button>
       </ButtonCollapse>
     </Stack>
   );
