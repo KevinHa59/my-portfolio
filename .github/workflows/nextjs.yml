@@ -22,8 +22,8 @@ jobs:
       - name: Deploy to Hostinger
         uses: easingthemes/ssh-deploy@v2
         with:
-          server: ftp://31.170.166.76
-          username: u101544584
-          key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLBJZJhC8jwJBpCXcS07WZyqWPu1bITGV1NQoIaV3+15wtbUkCkmhThZaEjFnStE6DkvQeWalY92qSRLNWYLJ8FWKaPkP2PFagketng8Aast/SIp70nduj4uS+J5TdiF2SNg7AcJ/tcKHw46eCT89xcSJVFaPlyjKR+dBjk+4UybNBVql9fWwsT97mXP9Vw5loG4gaFPf163VbaCupRCsBDDCxzNfQqS+KEeaVxuXSmahF/hWkd3Rw5d8FhUYMiVk1KZ5G5MteCQ22SJwQHNCaMTTn5Hv3f24bTWCzSGXSXmBy1KMlIx6Kjm+Cy4kSkfi0PodTJ58lnDCuS+qf4hUJ u101544584@us-imm-web357.main-hosting.eu
-          source: ".next"
+          server: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           dest: "/public_html/"
