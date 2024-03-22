@@ -1,13 +1,22 @@
 import RecommendIcon from "@mui/icons-material/Recommend";
 import { Fade, Paper, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "../components/index/menu";
 import { useRouter } from "next/router";
 import Introduction from "../components/index/introduction";
 import Skills from "../components/index/skills";
 import EduExp from "../components/index/edu-exp";
 export default function Home() {
-  const [tab, setTab] = useState(0);
+  const router = useRouter();
+
+  const [tab, setTab] = useState("introduction");
+
+  useEffect(() => {
+    const query = router.query;
+    if (query.tab) {
+      setTab(query.tab);
+    }
+  }, [router]);
 
   return (
     <Stack
@@ -22,9 +31,9 @@ export default function Home() {
       direction={"row"}
     >
       <Stack width={"calc(100% - 200px)"} paddingTop={8}>
-        {<Introduction isActive={tab === 0} />}
-        {<Skills isActive={tab === 1} />}
-        {<EduExp isActive={tab === 2} />}
+        {<Introduction isActive={tab === "introduction"} />}
+        {<Skills isActive={tab === "skills"} />}
+        {<EduExp isActive={tab === "edu-exp"} />}
       </Stack>
       <Stack minWidth={"200px"}>
         <Menu onChange={setTab} />

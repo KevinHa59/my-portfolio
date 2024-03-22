@@ -1,5 +1,4 @@
-import { portfolio } from "@/portfolio";
-import { Fade, Grow, Paper, Slide, Stack, Typography } from "@mui/material";
+import { Paper, Stack } from "@mui/material";
 import React from "react";
 import TypographyS from "../component/TypographyS";
 import Blur from "../component/transitions/blur";
@@ -18,7 +17,7 @@ export default function Introduction({ isActive }) {
             },
           ]}
         >
-          Hello, I'm Tong Ha
+          Hello, I am Tong Ha
         </TypographyS>
         <Paper
           sx={{

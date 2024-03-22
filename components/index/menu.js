@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ButtonCollapse from "../component/button-collapse";
+import { useRouter } from "next/router";
 const button_style = (isActive = false) => {
   return {
     color: "#fff",
@@ -30,22 +31,36 @@ const button_style = (isActive = false) => {
 };
 
 export default function Menu({ onChange }) {
-  const [selected, setSelected] = useState(0);
+  const router = useRouter();
+  const [selected, setSelected] = useState("introduction");
 
   const handleSelectChange = (val) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        tab: val,
+      },
+    });
     setSelected(val);
     onChange && onChange(val);
   };
 
+  useEffect(() => {
+    const query = router.query;
+    if (query.tab) {
+      setSelected(query.tab);
+    }
+  }, [router]);
+
   return (
-    <Stack paddingY={5}>
+    <Stack paddingY={5} height={"100%"} sx={{ position: "relative" }}>
       <ButtonCollapse title="About Me">
         <Button
           fullWidth
           size="small"
-          onClick={() => handleSelectChange(0)}
+          onClick={() => handleSelectChange("introduction")}
           sx={{
-            ...button_style(selected === 0),
+            ...button_style(selected === "introduction"),
           }}
         >
           Introduction
@@ -53,9 +68,9 @@ export default function Menu({ onChange }) {
         <Button
           fullWidth
           size="small"
-          onClick={() => handleSelectChange(1)}
+          onClick={() => handleSelectChange("skills")}
           sx={{
-            ...button_style(selected === 1),
+            ...button_style(selected === "skills"),
           }}
         >
           Skills
@@ -63,9 +78,9 @@ export default function Menu({ onChange }) {
         <Button
           fullWidth
           size="small"
-          onClick={() => handleSelectChange(2)}
+          onClick={() => handleSelectChange("edu-exp")}
           sx={{
-            ...button_style(selected === 2),
+            ...button_style(selected === "edu-exp"),
           }}
         >
           Edu & Exp

@@ -10,7 +10,7 @@ export default function ButtonCollapse({
 }) {
   const [expanse, setExpanse] = useState(false);
   return (
-    <Stack>
+    <Stack sx={{ position: "sticky", top: 50 }}>
       <Button
         onClick={() => setExpanse((prev) => !prev)}
         sx={{
