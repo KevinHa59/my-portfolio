@@ -22,8 +22,8 @@ jobs:
       - name: Deploy to Hostinger
         uses: easingthemes/ssh-deploy@v2
         with:
-          server: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USERNAME }}
-          password: ${{ secrets.HOSTINGER_PASSWORD }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          dest: "/public_html/"
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.HOSTINGER_HOST }}
+          REMOTE_USER: ${{ secrets.HOSTINGER_USERNAME }}
+          SOURCE: ".next"
+          TARGET: "/public_html/"
