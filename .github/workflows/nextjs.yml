@@ -3,27 +3,27 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Next.js app
-      run: npm run build
+      - name: Build Next.js app
+        run: npm run build
 
-    - name: Deploy to Hostinger
-      uses: easingthemes/ssh-deploy@v2
-      with:
-        server: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: '.next'
-        dest: '/public_html/'
+      - name: Deploy to Hostinger
+        uses: easingthemes/ssh-deploy@v2
+        with:
+          server: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ".next"
+          dest: "/public_html/"
