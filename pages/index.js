@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import Introduction from "../components/index/introduction";
 import Skills from "../components/index/skills";
 import EduExp from "../components/index/edu-exp";
+import Section from "../components/component/section";
+import { colors } from "../components/colors";
 export default function Home() {
   const router = useRouter();
 
@@ -21,23 +23,36 @@ export default function Home() {
   return (
     <Stack
       sx={{
-        width: {
-          xl: "1600px",
-          md: "80%",
-          xs: "100%",
-        },
+        width: "100%",
+        position: "relative",
       }}
       minHeight={"100vh"}
-      direction={"row"}
     >
-      <Stack width={"calc(100% - 200px)"} paddingTop={8}>
-        {<Introduction isActive={tab === "introduction"} />}
-        {<Skills isActive={tab === "skills"} />}
-        {<EduExp isActive={tab === "edu-exp"} />}
+      <Stack
+        width={"100%"}
+        sx={{ position: "fixed", top: 0, left: 0, height: "60px", zIndex: 5 }}
+      >
+        <Menu />
       </Stack>
-      <Stack minWidth={"200px"}>
-        <Menu onChange={setTab} />
-      </Stack>
+      <Section id={"intro"} background={"#000"} title={"INTRODUCTION"}>
+        <Introduction />
+      </Section>
+      <Section
+        background={colors.backgroundPaper}
+        id={"skills"}
+        title={"SKILLS"}
+        sx={{ background: colors.backgroundPaper }}
+      >
+        <Skills />
+      </Section>
+      <Section
+        background={"#000"}
+        id={"edu"}
+        title={"EDUCATION & EXPERIENCE"}
+        inner_sx={{ alignItems: "center" }}
+      >
+        <EduExp />
+      </Section>
     </Stack>
   );
 }
