@@ -16,33 +16,58 @@ function convert(str, styles) {
   let result = str;
   styles.forEach((_style) => {
     const { text, style, link } = _style;
-    const wordStyle = styleObjectToString(style);
-    const wordResetStyle = styleObjectToString(style, true);
-    const wordStyleHover = style.hover
-      ? styleObjectToString(style.hover, true)
-      : null;
+    const { wordStyle, wordResetStyle, wordStyleHover } = extractStyles(style);
+
     if (Array.isArray(text)) {
       text.forEach((_text, index) => {
-        let word = `<span style="${wordStyle}" ${
-          wordStyleHover ? `onmouseover="${wordStyleHover}"` : ""
-        } onmouseleave="${wordResetStyle}">${_text}</span>`;
-        if (link) {
-          word = extraLink(word, link);
-        }
-        result = result.replaceAll(_text, word);
+        result = spanString(
+          _text,
+          wordStyle,
+          wordStyleHover,
+          wordResetStyle,
+          link,
+          result
+        );
       });
     } else {
-      let word = `<span style="${wordStyle}" ${
-        wordStyleHover ? `onmouseover="${wordStyleHover}"` : ""
-      } onmouseleave="${wordResetStyle}">${text}</span>`;
-
-      if (link) {
-        word = extraLink(word, link);
-      }
-      result = result.replaceAll(text, word);
+      result = spanString(
+        text,
+        wordStyle,
+        wordStyleHover,
+        wordResetStyle,
+        link,
+        result
+      );
     }
   });
   return result;
+}
+
+function spanString(
+  value,
+  wordStyle,
+  wordStyleHover,
+  wordResetStyle,
+  link,
+  result
+) {
+  let word = `<span style="${wordStyle}" ${
+    wordStyleHover ? `onmouseover="${wordStyleHover}"` : ""
+  } onmouseleave="${wordResetStyle}">${value}</span>`;
+  if (link) {
+    word = extraLink(word, link);
+  }
+  return result.replaceAll(value, word);
+}
+
+// extract style of word, reset style, and hover style
+function extractStyles(style) {
+  const wordStyle = styleObjectToString(style);
+  const wordResetStyle = styleObjectToString(style, true);
+  const wordStyleHover = style.hover
+    ? styleObjectToString(style.hover, true)
+    : null;
+  return { wordStyle, wordResetStyle, wordStyleHover };
 }
 
 // Function to convert camelCase style properties to CSS properties

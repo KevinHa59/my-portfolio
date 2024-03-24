@@ -5,6 +5,8 @@ import {
   Paper,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SchoolIcon from "@mui/icons-material/School";
@@ -13,6 +15,8 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowDropDownCircleRoundedIcon from "@mui/icons-material/ArrowDropDownCircleRounded";
 import StyleSpan from "./TypographyS";
+import { colors } from "../colors";
+import { styles } from "../styles";
 
 const sample_data = [
   {
@@ -25,7 +29,7 @@ const sample_data = [
         variant={[
           {
             text: "Houston Community College",
-            style: { fontWeight: "bold", color: "rgb(251, 180, 37)" },
+            style: { fontWeight: "bold", color: colors.textHighlight },
           },
         ]}
       >
@@ -35,7 +39,7 @@ const sample_data = [
         applications.
       </StyleSpan>
     ),
-    color: "green",
+    color: colors.textHighlight,
   },
   {
     dateFrom: 2017,
@@ -76,7 +80,7 @@ const sample_data = [
         database systems, and web programming.
       </StyleSpan>
     ),
-    color: "green",
+    color: colors.textHighlight,
   },
   {
     dateFrom: 2022,
@@ -163,21 +167,30 @@ export default function TimeLine() {
 }
 
 function SectionItem({ item, isEven }) {
+  const theme = useTheme();
   const [isHover, setIsHover] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.only("xs"));
+
   return (
     <Stack
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      direction={isEven ? "row" : "row-reverse"}
+      direction={isMobile ? "row" : isEven ? "row" : "row-reverse"}
       width={"100%"}
       height={"100%"}
       justifyContent={"center"}
       alignItems={"stretch"}
     >
       <Stack
-        width={"100%"}
         direction={isEven ? "row-reverse" : "row"}
         alignItems={"center"}
+        sx={{
+          width: {
+            sm: "100%",
+            xs: "0",
+          },
+          overflow: "hidden",
+        }}
       >
         {item.dateTo && (
           <Stack
@@ -227,18 +240,26 @@ function SectionItem({ item, isEven }) {
 
       <Stack
         width={"100%"}
-        direction={isEven ? "row" : "row-reverse"}
+        direction={isMobile ? "row" : isEven ? "row" : "row-reverse"}
         alignItems={"center"}
         sx={{
           textAlign: "center",
           border: `1px solid ${item.color}`,
-          borderRadius: isEven ? "0 25px 25px 0" : "25px 0 0 25px",
+          borderRadius: isMobile
+            ? "0 25px 25px 0"
+            : isEven
+            ? "0 25px 25px 0"
+            : "25px 0 0 25px",
+          marginY: isMobile && 2,
         }}
         paddingY={2}
       >
         <Divider
           sx={{
-            width: "50px",
+            width: {
+              md: "50px",
+              xs: "0px",
+            },
             background: item.color,
             transition: "ease 0.5s",
           }}
@@ -272,8 +293,16 @@ function SectionItem({ item, isEven }) {
               </Typography>
             </Stack>
           </Typography>
+          {isMobile && (
+            <Typography fontStyle={"italic"}>
+              {item.dateFrom} {item.dateTo && ` - ${item.dateTo}`}
+            </Typography>
+          )}
           <Divider sx={{ background: "rgba(255,255,255,1)" }} />
-          <Typography variant="body1" sx={{ fontWeight: 100 }}>
+          <Typography
+            variant="body1"
+            sx={{ fontWeight: 300, fontSize: styles.fontSize.eduNormal }}
+          >
             {item.detail}
           </Typography>
         </Paper>

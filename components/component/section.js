@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import React from "react";
+import { styles } from "../styles";
 
 export default function Section({
   id,
@@ -13,6 +14,7 @@ export default function Section({
     <Stack
       id={id}
       alignItems={"center"}
+      zIndex={2}
       sx={{
         width: "100%",
         position: "relative",
@@ -25,9 +27,9 @@ export default function Section({
       <Stack
         sx={{
           width: {
-            xl: "1600px",
-            lg: "1300px",
-            md: "1000px",
+            xl: "1500px",
+            lg: "1200px",
+            md: "900px",
             xs: "100%",
           },
           ...inner_sx,
@@ -51,7 +53,7 @@ function VerticalText({ text }) {
         transform: "rotate(180deg)",
         opacity: 0.1,
         whiteSpace: "nowrap",
-        fontSize: "5vw",
+        fontSize: styles.fontSize.sideText,
       }}
     >
       {text}

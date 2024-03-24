@@ -9,11 +9,24 @@ export default function EduExp({ id }) {
       id={id}
       paddingY={5}
       sx={{
-        width: "50%",
+        width: {
+          md: "50%",
+          xs: "100%",
+        },
       }}
       alignItems={"center"}
     >
-      <TimeLine />
+      <Stack
+        justifyContent={"center"}
+        sx={{
+          width: {
+            md: "100%",
+            xs: "90%",
+          },
+        }}
+      >
+        <TimeLine />
+      </Stack>
     </Stack>
   );
 }

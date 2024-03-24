@@ -12,34 +12,49 @@ import { resume } from "@/resume";
 import { colors } from "../colors";
 import { LinkedInIcon } from "../../icons/socials/linkedin";
 import { GithubIcon } from "../../icons/socials/github";
-import { useRouter } from "next/router";
 import IconButtonRouting from "../component/button/button-routing";
+import { styles } from "../styles";
 
 export default function Introduction({ id }) {
-  const router = useRouter();
-
   return (
     <Stack
       id={id}
       paddingX={1}
       justifyContent={"center"}
+      alignItems={"center"}
       height={"calc(100vh - 60px)"}
+      position={"relative"}
     >
-      <Stack height={"80%"} justifyContent={"center"}>
+      <Stack
+        height={"80%"}
+        justifyContent={"center"}
+        sx={{
+          width: {
+            md: "100%",
+            xs: "90%",
+          },
+        }}
+      >
         <TypographyS
-          style={{ fontSize: "clamp(25px, 3vw, 50px)", fontWeight: "bold" }}
+          style={{ fontSize: styles.fontSize.introHeader, fontWeight: "bold" }}
           variant={[
             {
               text: "Tong Ha",
               style: { fontWeight: "bold", color: colors.textHighlight },
+              effect: {
+                type: "typing",
+              },
             },
           ]}
         >
           Hello, I am Tong Ha
         </TypographyS>
         <Typography
-          variant="h4"
-          sx={{ fontWeight: "bold", color: colors.textHighlight }}
+          sx={{
+            fontWeight: "bold",
+            color: colors.textHighlight,
+            fontSize: styles.fontSize.introSubHeader,
+          }}
         >
           Software Developer
         </Typography>
@@ -57,7 +72,10 @@ export default function Introduction({ id }) {
         >
           <Stack paddingY={6}>
             <TypographyS
-              style={{ fontSize: "19px", textAlign: "justify" }}
+              style={{
+                fontSize: styles.fontSize.normal,
+                textAlign: "justify",
+              }}
               variant={[
                 {
                   text: [
@@ -83,7 +101,7 @@ export default function Introduction({ id }) {
           </Stack>
         </Paper>
       </Stack>
-      <Stack height={"20%"} gap={1}>
+      <Stack minHeight={"20%"} width={"100%"} gap={1} paddingY={2}>
         <Stack direction={"row"} justifyContent={"center"}>
           <Tooltip title="Linked In">
             <IconButtonRouting link={"https://www.linkedin.com/in/tong-ha/"}>
@@ -111,7 +129,13 @@ export default function Introduction({ id }) {
             variant={[
               { text: "(346)", style: { color: colors.textHighlight } },
             ]}
-            style={{ width: "50%", textAlign: "right" }}
+            style={{
+              width: {
+                sm: "50%",
+                xs: "auto",
+              },
+              textAlign: "right",
+            }}
           >
             (346)-219 2755
           </TypographyS>
@@ -119,7 +143,15 @@ export default function Introduction({ id }) {
             orientation="vertical"
             sx={{ background: colors.textHighlight }}
           />
-          <Typography textAlign={"left"} sx={{ width: "50%" }}>
+          <Typography
+            textAlign={"left"}
+            sx={{
+              width: {
+                sm: "50%",
+                xs: "auto",
+              },
+            }}
+          >
             haquoctong59@gmail.com
           </Typography>
         </Stack>

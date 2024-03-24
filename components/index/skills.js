@@ -17,6 +17,8 @@ import { SQLServerIcon } from "../../icons/skills/sql-server";
 import { MongoDBIcon } from "../../icons/skills/mongodb";
 import { GitIcon } from "../../icons/skills/git";
 import { colors } from "../colors";
+import { ArrowLeftIcon } from "../../icons/arrow-left";
+import { styles } from "../styles";
 
 export default function Skills({ id }) {
   return (
@@ -32,10 +34,21 @@ export default function Skills({ id }) {
           xs: "100%",
         },
       }}
+      position={"relative"}
+      alignItems={"center"}
     >
-      <Stack padding={2} gap={3}>
+      <Stack
+        padding={2}
+        gap={3}
+        sx={{
+          width: {
+            md: "100%",
+            xs: "90%",
+          },
+        }}
+      >
         <StyleSpan
-          style={{ fontSize: "19px", textAlign: "justify" }}
+          style={{ fontSize: styles.fontSize.normal, textAlign: "justify" }}
           variant={[
             {
               text: [
@@ -54,12 +67,32 @@ export default function Skills({ id }) {
           which I excel:
         </StyleSpan>
         <Divider sx={{ background: "rgb(150,150,150)" }} />
-        <Stack gap={3} paddingX={5}>
+        <Stack
+          gap={3}
+          sx={{
+            paddingX: {
+              md: 5,
+              xs: 0,
+            },
+          }}
+        >
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              fontWeight={"bold"}
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+            >
               Frontend Development
             </Typography>
-            <Stack direction={"row"} gap={2}>
+            <Stack
+              direction={"row"}
+              gap={2}
+              sx={{
+                flexWrap: {
+                  sm: "nowrap",
+                  xs: "wrap",
+                },
+              }}
+            >
               <IconTemplate
                 Icon={ReactIcon}
                 color={"rgb(48, 122, 161)"}
@@ -79,10 +112,22 @@ export default function Skills({ id }) {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+              fontWeight={"bold"}
+            >
               Backend Development
             </Typography>
-            <Stack direction={"row"} gap={2}>
+            <Stack
+              direction={"row"}
+              gap={2}
+              sx={{
+                flexWrap: {
+                  sm: "nowrap",
+                  xs: "wrap",
+                },
+              }}
+            >
               <IconTemplate
                 Icon={NodeJSIcon}
                 color="rgb(80, 153, 65)"
@@ -106,10 +151,22 @@ export default function Skills({ id }) {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+              fontWeight={"bold"}
+            >
               Web Services
             </Typography>
-            <Stack direction={"row"} gap={2}>
+            <Stack
+              direction={"row"}
+              gap={2}
+              sx={{
+                flexWrap: {
+                  sm: "nowrap",
+                  xs: "wrap",
+                },
+              }}
+            >
               <IconTemplate Icon={APIIcon} title="Rest API" />
               <IconTemplate
                 Icon={AzureIcon}
@@ -119,10 +176,22 @@ export default function Skills({ id }) {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+              fontWeight={"bold"}
+            >
               Database Management:
             </Typography>
-            <Stack direction={"row"} gap={2}>
+            <Stack
+              direction={"row"}
+              gap={2}
+              sx={{
+                flexWrap: {
+                  sm: "nowrap",
+                  xs: "wrap",
+                },
+              }}
+            >
               <IconTemplate
                 Icon={MYSQLIcon}
                 color="rgb(55, 192, 235)"
@@ -141,10 +210,22 @@ export default function Skills({ id }) {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+              fontWeight={"bold"}
+            >
               Version Control:
             </Typography>
-            <Stack direction={"row"} gap={2}>
+            <Stack
+              direction={"row"}
+              gap={2}
+              sx={{
+                flexWrap: {
+                  sm: "nowrap",
+                  xs: "wrap",
+                },
+              }}
+            >
               <IconTemplate
                 Icon={GitIcon}
                 color="rgb(232, 78, 49)"
@@ -153,7 +234,10 @@ export default function Skills({ id }) {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6" fontWeight={"bold"}>
+            <Typography
+              sx={{ fontSize: styles.fontSize.skillHeader }}
+              fontWeight={"bold"}
+            >
               Languages:
             </Typography>
             <Stack direction={"row"} gap={1}>
@@ -166,7 +250,7 @@ export default function Skills({ id }) {
         </Stack>
         <Divider sx={{ background: "rgb(150,150,150)" }} />
         <StyleSpan
-          style={{ fontSize: "19px", textAlign: "justify" }}
+          style={{ fontSize: styles.fontSize.normal, textAlign: "justify" }}
           variant={[
             {
               text: [
@@ -193,8 +277,12 @@ export default function Skills({ id }) {
 function IconTemplate({ Icon, title = "", color }) {
   return (
     <Stack direction={"row"} alignItems={"center"} gap={1}>
-      <Icon sx={{ fontSize: "35px", color: color }} />
-      {title}
+      <Icon sx={{ fontSize: styles.fontSize.skillIcon, color: color }} />
+      <Typography
+        sx={{ fontSize: styles.fontSize.normal, whiteSpace: "nowrap" }}
+      >
+        {title}
+      </Typography>
     </Stack>
   );
 }
